@@ -13,7 +13,7 @@ public class CreateCharacterController : MonoBehaviour
     public TextMeshProUGUI lifeText;
     public TextMeshProUGUI speedText;
     public Button buttonSelect;
-
+    public SceneFader sceneFader;
 
     // string path = Application.streamingAssetsPath + "/Data/characters.json";
 
@@ -43,8 +43,6 @@ public class CreateCharacterController : MonoBehaviour
     void Awake()
     {
         TextAsset jsonFile = Resources.Load<TextAsset>("Data/characters");
-        Debug.Log(jsonFile);
-
         characterList = JsonUtility.FromJson<CharacterDataList>(jsonFile.text);
 
         //Load First character
@@ -73,8 +71,9 @@ public class CreateCharacterController : MonoBehaviour
     {
         buttonSelect.onClick.AddListener(() =>
         {
-            
+            StartCoroutine(sceneFader.FadeOutCoroutine(1));
         });
+        // await SceneManager.LoadSceneAsync("");
 
     }
 
@@ -83,7 +82,7 @@ public class CreateCharacterController : MonoBehaviour
     {
 
     }
-    
+
     void ChangeCharacter(bool leftPressed)
     {
         if (leftPressed)
