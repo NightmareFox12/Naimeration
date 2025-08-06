@@ -4,13 +4,13 @@
       "name": "Shorty",
       "life": 5,
       "speed": 2,
-      "pathSprite": "Sprites/Characters/character1"
+      "pathSprite": "Sprites/Characters/character2"
     },
     {
       "name": "Kenney",
       "life": 2,
       "speed": 3,
-      "pathSprite": "Sprites/Characters/character2"
+      "pathSprite": "Sprites/Characters/character1"
     }
   ]
 }
