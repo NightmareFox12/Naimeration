@@ -1,0 +1,16 @@
+{
+  "characters": [
+    {
+      "name": "Shorty",
+      "life": 5,
+      "speed": 2,
+      "pathSprite": "Sprites/Characters/character1"
+    },
+    {
+      "name": "Kenney",
+      "life": 2,
+      "speed": 3,
+      "pathSprite": "Sprites/Characters/character2"
+    }
+  ]
+}
