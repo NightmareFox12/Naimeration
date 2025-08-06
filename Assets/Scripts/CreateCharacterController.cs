@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -71,10 +72,8 @@ public class CreateCharacterController : MonoBehaviour
     {
         buttonSelect.onClick.AddListener(() =>
         {
-            StartCoroutine(sceneFader.FadeOutCoroutine(1));
+            StartCoroutine(ChangeScene());
         });
-        // await SceneManager.LoadSceneAsync("");
-
     }
 
     // Update is called once per frame
@@ -102,5 +101,10 @@ public class CreateCharacterController : MonoBehaviour
         speedText.text = currentCharacter.speed.ToString();
     }
 
+    private IEnumerator ChangeScene()
+    {
+        yield return StartCoroutine(sceneFader.FadeOutCoroutine(1));
+        SceneManager.LoadSceneAsync("Level1");
+    }
 
 }
