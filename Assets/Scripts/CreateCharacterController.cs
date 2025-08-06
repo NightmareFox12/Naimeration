@@ -1,15 +1,19 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CreateCharacterController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Button buttonBack;
     public Image characterImage;
     public Button buttonLeft;
     public Button buttonRight;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI lifeText;
+    public TextMeshProUGUI speedText;
+    public Button buttonSelect;
 
-    public TextMeshProUGUI characterName;
 
     // string path = Application.streamingAssetsPath + "/Data/characters.json";
 
@@ -46,20 +50,40 @@ public class CreateCharacterController : MonoBehaviour
         //Load First character
         CharacterData firstCharacter = characterList.characters[0];
         characterImage.sprite = Resources.Load<Sprite>(firstCharacter.pathSprite);
-        characterName.text = firstCharacter.name;
+        nameText.text = firstCharacter.name;
+        lifeText.text = firstCharacter.life.ToString();
+        speedText.text = firstCharacter.speed.ToString();
 
         buttonLeft.onClick.AddListener(() =>
         {
             ChangeCharacter(true);
         });
-
         buttonRight.onClick.AddListener(() =>
         {
             ChangeCharacter(false);
         });
+        buttonBack.onClick.AddListener(() =>
+        {
+            SceneManager.LoadSceneAsync("MainMenu");
+        });
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        buttonSelect.onClick.AddListener(() =>
+        {
+            
+        });
 
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+    
     void ChangeCharacter(bool leftPressed)
     {
         if (leftPressed)
@@ -74,20 +98,10 @@ public class CreateCharacterController : MonoBehaviour
         CharacterData currentCharacter = characterList.characters[nextCharacterID];
 
         characterImage.sprite = Resources.Load<Sprite>(currentCharacter.pathSprite);
-        characterName.text = currentCharacter.name;
+        nameText.text = currentCharacter.name;
+        lifeText.text = currentCharacter.life.ToString();
+        speedText.text = currentCharacter.speed.ToString();
     }
 
-    void Start()
-    {
-        // Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Player");
 
-        // characterImage.sprite = sprites[0];
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

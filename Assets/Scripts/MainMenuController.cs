@@ -10,12 +10,13 @@ public class MainMenuController : MonoBehaviour
     public Button optionsButton;
     public Button quitButton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    void Awake()
     {
         playButton.onClick.AddListener(() =>
-        {
-            SceneManager.LoadScene("CreateCharacter");
-        });
+    {
+        SceneManager.LoadSceneAsync("CreateCharacter");
+    });
 
         statsButton.onClick.AddListener(() =>
         {
@@ -31,6 +32,10 @@ public class MainMenuController : MonoBehaviour
         {
             Application.Quit();
         });
+    }
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
