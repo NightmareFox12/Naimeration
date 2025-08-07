@@ -5,8 +5,8 @@ public class Player : MonoBehaviour
 {
     //public vars
     public Camera mainCamera;
-    public float speed = 5f;
-    public float acceleration = 8f;
+    public float speed = 7f;
+    public float acceleration = 1f;
 
     //private vars
     private Rigidbody2D rb;
@@ -19,8 +19,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerSprite = GetComponent<SpriteRenderer>();
 
-        playerSprite.sprite =
-        playerSprite.sprite = Resources.Load<Sprite>(GameManager.Instance.playerSelected.pathSprite);
+        // playerSprite.sprite = Resources.Load<Sprite>(GameManager.Instance.playerSelected.pathSprite);
 
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
@@ -28,7 +27,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        // mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
+        mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
     }
 
     public Vector2 cameraOffset = new(1.5f, 0f);
@@ -46,12 +45,14 @@ public class Player : MonoBehaviour
         float targetSpeed = moveValue.x * speed;
         float smoothSpeed = Mathf.SmoothDamp(rb.linearVelocity.x, targetSpeed, ref currentVelocityX, 0.1f);
         rb.linearVelocity = new Vector2(smoothSpeed, rb.linearVelocity.y);
-        // Vector3 targetPosition = new(
-        //     transform.position.x + cameraOffset.x * Mathf.Sign(moveValue.x),
-        //     transform.position.y + cameraOffset.y,
-        //     -10f
-        // );
-        // mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, targetPosition, ref cameraVelocity, 0.15f);
+
+
+        Vector3 targetPosition = new(
+            transform.position.x + cameraOffset.x * Mathf.Sign(moveValue.x),
+            transform.position.y + cameraOffset.y,
+            -10f
+        );
+        mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, targetPosition, ref cameraVelocity, 0.15f);
 
         //         mainCamera.transform.position = Vector3.SmoothDamp(
         //        mainCamera.transform.position,
