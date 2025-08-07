@@ -104,6 +104,7 @@ public class CreateCharacterController : MonoBehaviour
     private IEnumerator ChangeScene()
     {
         yield return StartCoroutine(sceneFader.FadeOutCoroutine(1));
+        GameManager.Instance.playerSelected = characterList.characters[nextCharacterID];
         SceneManager.LoadSceneAsync("Level1");
     }
 
