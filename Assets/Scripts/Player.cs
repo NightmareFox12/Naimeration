@@ -50,12 +50,9 @@ public class Player : MonoBehaviour
         //  if (moveValue.x == -1) playerSprite.flipX = true;
         // else if (moveValue.x == 1) playerSprite.flipX = false;
 
-        Debug.Log(moveValue.x);
-
         float targetSpeed = moveValue.x * speed;
         float smoothSpeed = Mathf.SmoothDamp(rb.linearVelocity.x, targetSpeed, ref currentVelocityX, 0.1f);
         rb.linearVelocity = new Vector2(smoothSpeed, rb.linearVelocity.y);
-
 
         Vector3 targetPosition = new(
             transform.position.x + cameraOffset.x * Mathf.Sign(moveValue.x),
