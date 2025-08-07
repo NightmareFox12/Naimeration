@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     //public vars
     public Camera mainCamera;
+    public Joystick joystick;
     public float speed = 7f;
     public float acceleration = 1f;
 
@@ -38,9 +39,18 @@ public class Player : MonoBehaviour
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
 
-        if (moveValue.x == -1) playerSprite.flipX = true;
-        else if (moveValue.x == 1) playerSprite.flipX = false;
+        //android verification
+#if UNITY_ANDROID
+        moveValue.x = joystick.Horizontal * 1.5f;
 
+        if (moveValue.x < 0) playerSprite.flipX = true;
+        else if (moveValue.x > 0) playerSprite.flipX = false;
+
+#endif
+        //  if (moveValue.x == -1) playerSprite.flipX = true;
+        // else if (moveValue.x == 1) playerSprite.flipX = false;
+
+        Debug.Log(moveValue.x);
 
         float targetSpeed = moveValue.x * speed;
         float smoothSpeed = Mathf.SmoothDamp(rb.linearVelocity.x, targetSpeed, ref currentVelocityX, 0.1f);
